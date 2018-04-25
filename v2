@@ -1,0 +1,67 @@
+function blackjack
+
+ace=1;
+two=2;
+three=3;
+four=4;
+five=5;
+six=6;
+seven=7;
+eight=8;
+nine=9;
+ten=10;
+jack=10;
+queen=10;
+king=10;
+
+suite=[ace two three four five six seven eight nine ten jack queen king];
+deck=[suite suite suite suite];
+numdeck=[deck deck];
+
+dealerhand=[0 0 0 0 0];
+playerhand=[0 0 0 0 0];
+%Starting with the dealer
+for i=1:5
+    card1=numdeck(randi([1 length(numdeck)],1,1));
+    dealerhand(i)=card1;
+    if sum(dealerhand)>=16 && sum(dealerhand)<=21
+      fprintf('The dealer stays\n')
+      break
+      end
+    if sum(dealerhand)>21
+      fprintf('Dealer busted\n')
+      break
+    end
+end
+ 
+for m=1:5
+  card2=numdeck(randi([1 length(numdeck)],1,1));
+  playerhand(m)=card2;
+  if sum(playerhand)>=16 && sum(playerhand)<=21
+      fprintf('The player stays\n')
+      break
+      end
+   if sum(playerhand)>21
+      fprintf('Player busted\n')
+      break
+    end
+ end
+ 
+dealerhand
+playerhand
+dealertotal=sum(dealerhand)
+playertotal=sum(playerhand)
+
+if dealertotal>21
+  fprintf('The dealer busted\n')
+  elseif dealertotal>playertotal
+  fprintf('The dealer won\n')
+
+end
+
+if playertotal>21
+  fprintf('The player busted')
+  elseif playertotal>dealertotal
+  fprintf('The player won\n')
+
+end
