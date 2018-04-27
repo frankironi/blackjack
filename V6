@@ -1,0 +1,95 @@
+function blackjack
+
+ace=11;
+two=2;
+three=3;
+four=4;
+five=5;
+six=6;
+seven=7;
+eight=8;
+nine=9;
+ten=10;
+jack=10;
+queen=10;
+king=10;
+
+suite=[ace two three four five six seven eight nine ten jack queen king];
+deck=[suite suite suite suite];
+numdeck=[deck deck];
+
+dealercount=0;
+playercount=0;
+
+%Starting with the dealer
+while isempty(numdeck)==0
+ if length(numdeck)<=13
+ break
+ end
+dealerhand=[0 0 0 0 0];
+playerhand=[0 0 0 0 0];
+randomcard1=randi([1 length(numdeck)],1,1);
+randomcard1=numdeck(randomcard1);
+numdeck(randomcard1)=[];
+randomcard2=randi([1 length(numdeck)],1,1);
+randomcard2=numdeck(randomcard2);
+numdeck(randomcard2)=[];
+randomcard3=randi([1 length(numdeck)],1,1);
+randomcard3=numdeck(randomcard3);
+numdeck(randomcard3)=[];
+randomcard4=randi([1 length(numdeck)],1,1);
+randomcard4=numdeck(randomcard4);
+numdeck(randomcard4)=[];
+
+dealerhand=[randomcard2 randomcard4 0 0 0];
+playerhand=[randomcard1 randomcard3 0 0 0];
+
+ for m=1:3
+   if sum(playerhand)>=16 && sum(playerhand)<=21
+      break
+      elseif sum(playerhand)>21
+      break
+   end
+  randomcardplayer=randi([1 length(numdeck)],1,1);
+  card2=numdeck(randomcardplayer);
+  playerhand(m+2)=card2;
+  numdeck(randomcard2)=[];
+ end
+ 
+ playertotal=sum(playerhand);
+ 
+ if playertotal<21
+    dealercount=dealercount+1;
+    
+   for i=1:3
+     if sum(dealerhand)>=16 && sum(dealerhand)<=21
+      break
+      elseif sum(dealerhand)>21
+      break
+      end
+    randomcarddealer=randi([1 length(numdeck)],1,1);
+    card1=numdeck(randomcarddealer);
+    dealerhand(i+2)=card1;
+    numdeck(randomcard1)=[];
+    end 
+ end
+ 
+ dealertotal=sum(dealerhand);
+ playertotal
+ dealertotal
+ playercount
+ dealercount
+ length(numdeck)
+ 
+ if playertotal>21
+  dealercount=dealercount+1;
+  elseif dealertotal>21
+    playercount=playercount+1;
+  elseif playertotal>dealertotal
+    playercount=playercount+1;
+  else playertotal<dealertotal
+    dealercount=dealercount+1;
+   end 
+  end
+ 
+end  
